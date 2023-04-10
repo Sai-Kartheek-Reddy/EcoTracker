@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather/home/weather.dart';
+import 'package:weather/profile.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: WeatherPage(),
+      home: ProfilePage(),
     );
   }
 }
