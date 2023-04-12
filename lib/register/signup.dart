@@ -115,7 +115,7 @@ class _MyRegisterState extends State<MyRegister> {
                                borderRadius: BorderRadius.circular(10),
                                borderSide: BorderSide(color: Colors.white),
                              ),
-                             labelText: 'Phone Number',
+                             label: Text('Phone Number'),
                              labelStyle: TextStyle(fontWeight: FontWeight.bold),
                              contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                              border: OutlineInputBorder(
@@ -151,7 +151,7 @@ class _MyRegisterState extends State<MyRegister> {
                              ),
                            ),
                            validator: (value) =>
-                           value!.isEmpty ? 'Please enter your Email' : null,
+                           value!.isEmpty ? 'Please enter your Password' : null,
                            onSaved: (value) {
                              _password = value;
                            },
