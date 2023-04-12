@@ -26,7 +26,7 @@ class AuthenticationRepository extends GetxController {
   Future<void> createUserWithEmailAndPassword(String email , String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      firebaseUser.value != null ? Get.offAll(() => LoginPage()) : Get.to(() => WeatherPage());
+      firebaseUser.value != null ? Get.offAll(() => WeatherPage()) : Get.to(() => WeatherPage());
     } on FirebaseAuthException catch(e){
       final ex =  SignUpWithEmailAndPassFailure.code(e.code);
       print('FireBase Auth Exception - ${ex.message}');

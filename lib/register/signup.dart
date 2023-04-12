@@ -49,7 +49,7 @@ class _MyRegisterState extends State<MyRegister> {
         Scaffold(
           backgroundColor: Colors.transparent, // Set the background color to transparent
           body: Form(
-            key: _formkey,
+            key: _formKey,
              child: SingleChildScrollView(
                child: Container(
                    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.29,right: 35,left: 35),
@@ -145,7 +145,7 @@ class _MyRegisterState extends State<MyRegister> {
                            width: double.infinity,
                            child: ElevatedButton(
                              onPressed: () {
-                               if(_formKey.currentState == null ){
+                               if(_formKey.currentState!.validate() ){
                                  SignUpController.instance.registerUser(controller.email.text.trim(), controller.password.text.trim());
                                }
                              },
