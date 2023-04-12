@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:weather/home/weather.dart';
+import 'package:weather/register/signup.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -126,7 +127,9 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        TextButton(onPressed: (){Navigator.pushNamed(context, 'register');}, child: Text('Sign Up',style: TextStyle(decoration: TextDecoration.underline , fontSize: 18,color: Color(0xff4c505b)),)),
+                        TextButton(onPressed: (){Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => MyRegister()));}, child: Text('Sign Up',style: TextStyle(decoration: TextDecoration.underline , fontSize: 18,color: Color(0xff4c505b)),)),
                         TextButton(onPressed: (){}, child: Text('Forgot Password',style: TextStyle(decoration: TextDecoration.underline , fontSize: 18,color: Color(0xff4c505b)),)),
                       ],
                     ),

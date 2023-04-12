@@ -15,14 +15,10 @@ class MyRegister extends StatefulWidget {
 
 class _MyRegisterState extends State<MyRegister> {
   final _formKey = GlobalKey<FormState>();
-  String? _username;
-  String? _password;
+  String? _fullname;
   String? _email;
-  String? _repassword;
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _repasswordController = TextEditingController();
+  String? _phonenumber;
+  String? _password;
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +71,11 @@ class _MyRegisterState extends State<MyRegister> {
                                  borderSide: BorderSide(color: Colors.white)
                              ),
                            ),
+                           validator: (value) =>
+                           value!.isEmpty ? 'Please enter your Email' : null,
+                           onSaved: (value) {
+                             _fullname = value;
+                           },
                          ),
                          SizedBox(height: 30),
                          TextFormField(
@@ -96,6 +97,11 @@ class _MyRegisterState extends State<MyRegister> {
                                  borderSide: BorderSide(color: Colors.white)
                              ),
                            ),
+                           validator: (value) =>
+                           value!.isEmpty ? 'Please enter your Email' : null,
+                           onSaved: (value) {
+                             _email = value;
+                           },
                          ),
                          SizedBox(height: 30),
                          TextFormField(
@@ -117,6 +123,11 @@ class _MyRegisterState extends State<MyRegister> {
                                  borderSide: BorderSide(color: Colors.white)
                              ),
                            ),
+                           validator: (value) =>
+                           value!.isEmpty ? 'Please enter your Email' : null,
+                           onSaved: (value) {
+                             _phonenumber = value;
+                           },
                          ),
                          SizedBox(height: 30),
                          TextFormField(
@@ -139,6 +150,11 @@ class _MyRegisterState extends State<MyRegister> {
                                  borderSide: BorderSide(color: Colors.white)
                              ),
                            ),
+                           validator: (value) =>
+                           value!.isEmpty ? 'Please enter your Email' : null,
+                           onSaved: (value) {
+                             _password = value;
+                           },
                          ),
                          SizedBox(height: 30),
                          SizedBox(

@@ -24,11 +24,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: 'login',
-      routes: {
-        'login': (context) => LoginPage(),
-        'register': (context) => MyRegister(),
-      },
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -42,7 +37,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: MyRegister(),
     );
   }
 }

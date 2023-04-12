@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:weather/home/weather.dart';
 import 'package:weather/register/failure.dart';
 import 'package:weather/register/login.dart';
+import 'package:weather/register/signup.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -20,13 +21,13 @@ class AuthenticationRepository extends GetxController {
   }
 
   _setInitialScreen(User? user) {
-    user == null ? Get.offAll(() => WeatherPage()) : Get.offAll(() => LoginPage());
+    user == null ? Get.offAll(() => LoginPage()) : Get.offAll(() => LoginPage());
   }
 
   Future<void> createUserWithEmailAndPassword(String email , String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(email: email, password: password);
-      firebaseUser.value != null ? Get.offAll(() => WeatherPage()) : Get.to(() => WeatherPage());
+      firebaseUser.value != null ? Get.offAll(() => WeatherPage()) : Get.to(() => MyRegister());
     } on FirebaseAuthException catch(e){
       final ex =  SignUpWithEmailAndPassFailure.code(e.code);
       print('FireBase Auth Exception - ${ex.message}');
