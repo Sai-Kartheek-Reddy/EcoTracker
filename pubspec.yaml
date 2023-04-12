@@ -38,6 +38,10 @@ dependencies:
 
   http: any
   intl: ^0.17.0
+  firebase_auth: ^4.3.0
+  firebase_core: ^2.8.0
+  page_transition: ^2.0.9
+  get: ^4.6.5
 
 dev_dependencies:
   flutter_test:
