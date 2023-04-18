@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import '../register/login.dart';
 import 'date.dart';
 
 class WeatherPage extends StatefulWidget {

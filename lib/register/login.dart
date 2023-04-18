@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:weather/home/weather.dart';
 import 'package:weather/register/signup.dart';
+import 'package:weather/register/signupcontroller.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -17,7 +18,65 @@ class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
-
+  Future<void> _login() async {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      try {
+        UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _username!,
+          password: _password!,
+        );
+        // User is logged in, navigate to WeatherPage
+        Navigator.push(
+          context,
+          PageTransition(
+            type: PageTransitionType.rightToLeft,
+            child: WeatherPage(),
+            duration: Duration(milliseconds: 500),
+          ),
+        );
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found') {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Login Failed'),
+                content: Text('No user found with the provided email.'),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text('OK'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        } else if (e.code == 'wrong-password') {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Login Failed'),
+                content: Text('The password is incorrect.'),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text('OK'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        }
+      }
+    }
+  }
 
   @override
   void dispose() {
@@ -25,6 +84,7 @@ class _LoginPageState extends State<LoginPage> {
     _passwordController.dispose();
     super.dispose();
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -107,16 +167,64 @@ class _LoginPageState extends State<LoginPage> {
                             child: IconButton(
                               color: Colors.white,
                               icon: Icon(Icons.arrow_forward),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  PageTransition(
-                                    type: PageTransitionType.rightToLeft,
-                                    child: WeatherPage(),
-                                    duration: Duration(milliseconds: 500),
-                                  ),
-                                );
-
+                              onPressed: () async {
+                                if(_formKey.currentState!.validate() ){
+                                  _formKey.currentState!.save();
+                                  try {
+                                    UserCredential userCredential =
+                                        await FirebaseAuth.instance.signInWithEmailAndPassword(
+                                      email: _username!,
+                                      password: _password!,
+                                    );
+                                    // User is logged in, navigate to WeatherPage
+                                    Navigator.push(
+                                      context,
+                                      PageTransition(
+                                        type: PageTransitionType.rightToLeft,
+                                        child: WeatherPage(),
+                                        duration: Duration(milliseconds: 500),
+                                      ),
+                                    );
+                                  } on FirebaseAuthException catch (e) {
+                                    if (e.code == 'user-not-found') {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text('Login Failed'),
+                                            content: Text('No user found with the provided email.'),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                child: Text('OK'),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    } else if (e.code == 'wrong-password') {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text('Login Failed'),
+                                            content: Text('The password is incorrect.'),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                child: Text('OK'),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    }
+                                  }
+                                }
                               },
                             ),
                           ),

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:weather/register/login.dart';
 import 'package:weather/register/signupcontroller.dart';
 
 
@@ -150,31 +151,42 @@ class _MyRegisterState extends State<MyRegister> {
                                  borderSide: BorderSide(color: Colors.white)
                              ),
                            ),
-                           validator: (value) =>
-                           value!.isEmpty ? 'Please enter your Password' : null,
-                           onSaved: (value) {
-                             _password = value;
-                           },
-                         ),
+                             validator: (value) =>
+                             value!.isEmpty ? 'Please enter your Password' : null,
+                             onSaved: (value) {
+                               _password = value;
+                             },
+                           ),
+                           SizedBox(height: 30),
+                           SizedBox(
+                             width: double.infinity,
+                             child: ElevatedButton(
+                               onPressed: () {
+                                 if(_formKey.currentState!.validate() ){
+                                   SignUpController.instance.registerUser(controller.email.text.trim(), controller.password.text.trim());
+                                 }
+                               },
+                               child: Text('SignUp'),
+                             ),
+                           ),
                          SizedBox(height: 30),
                          SizedBox(
                            width: double.infinity,
                            child: ElevatedButton(
-                             onPressed: () {
-                               if(_formKey.currentState!.validate() ){
-                                 SignUpController.instance.registerUser(controller.email.text.trim(), controller.password.text.trim());
-                               }
-                             },
-                             child: Text('SignUp'),
+                             onPressed: () {Navigator.push(
+                                 context,
+                                 MaterialPageRoute(builder: (context) => LoginPage()));},
+                             child: Text('Login'),
                            ),
                          )
-                       ],
-                     ),
+                         ],
 
-                 ),
-             ),
-          ),)
-      ],
-    );
+                       ),
+                   ),
+               ),
+            ),
+          ),
+        ],
+      );
+    }
   }
-}
