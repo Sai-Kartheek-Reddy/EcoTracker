@@ -75,6 +75,24 @@ class _WeatherPageState extends State<WeatherPage>
                   ),
                 ),
               ),
+            Positioned(
+              top: 50,
+              right: 0,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    (route) => false,
+                  );
+                },
+                icon: Icon(
+                  Icons.power_settings_new,
+                  color: Colors.black,
+                  size: 30,
+                ),
+              ),
+            ),
             Container(
               child: Container(
                 margin: EdgeInsets.only(top: 80, bottom: 20),
