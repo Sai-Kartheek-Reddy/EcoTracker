@@ -4,7 +4,6 @@ import 'package:flutter/rendering.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:weather/home/weather.dart';
 import 'package:weather/register/signup.dart';
-import 'package:weather/register/signupcontroller.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -125,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                     TextFormField(
                       controller: _usernameController,
                       decoration: InputDecoration(
-                        labelText: 'Username',
+                        labelText: 'Email',
                         labelStyle: TextStyle(fontWeight: FontWeight.bold),
                         contentPadding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                         border: OutlineInputBorder(
@@ -168,7 +167,7 @@ class _LoginPageState extends State<LoginPage> {
                               color: Colors.white,
                               icon: Icon(Icons.arrow_forward),
                               onPressed: () async {
-                                if(_formKey.currentState!.validate() ){
+                                if (_formKey.currentState!.validate()) {
                                   _formKey.currentState!.save();
                                   try {
                                     UserCredential userCredential =
