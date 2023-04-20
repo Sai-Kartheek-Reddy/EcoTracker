@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../register/login.dart';
+import 'calender.dart';
 import 'date.dart';
 
 class WeatherPage extends StatefulWidget {
@@ -163,7 +164,7 @@ class _WeatherPageState extends State<WeatherPage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(builder: (context) => MonthPage(userName: "sai")),
                       );
                     },
                     child: Container(
@@ -173,18 +174,35 @@ class _WeatherPageState extends State<WeatherPage> {
                         borderRadius: BorderRadius.circular(15),
                         color: Colors.orange.withOpacity(0.1),
                       ),
-                      child: Center(
-                        child: Image(
-                          image: AssetImage('assets/image/calendar.png'),
-                          width: 80,
-                          height: 80,
-                        ),
-                      ),
+
                     ),
                   ),
                 ),
               ],
             ),
+            Stack(
+              children: [
+                Positioned(
+                  left: MediaQuery.of(context).size.width * 0.085,
+                  top: MediaQuery.of(context).size.height * 0.51,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MonthPage(userName: "sai")),
+                      );
+                    },
+                    child: Image.asset(
+                      'Assets/image/calendar.png',
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      height: MediaQuery.of(context).size.height * 0.15,
+                      // add any other properties you need here
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
 
             Stack(
               children: [
