@@ -10,8 +10,7 @@ class WeatherPage extends StatefulWidget {
   _WeatherPageState createState() => _WeatherPageState();
 }
 
-class _WeatherPageState extends State<WeatherPage>
-{
+class _WeatherPageState extends State<WeatherPage> {
   var _highTemp;
   var _lowTemp;
   var _temp;
@@ -25,7 +24,7 @@ class _WeatherPageState extends State<WeatherPage>
 
   void _getWeatherData() async {
     var response =
-    await http.get(Uri.https('api.weatherbit.io', '/v2.0/forecast/daily', {
+        await http.get(Uri.https('api.weatherbit.io', '/v2.0/forecast/daily', {
       'lat': '15.4589',
       'lon': '75.0078',
       'key': 'ff81b333db694538b210e492254e7e61',
@@ -49,7 +48,7 @@ class _WeatherPageState extends State<WeatherPage>
       home: Scaffold(
         body: Stack(
           children: [
-            if (_temp != null && _temp>28 )
+            if (_temp != null && _temp > 28)
               Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -88,6 +87,7 @@ class _WeatherPageState extends State<WeatherPage>
                   );
                 },
                 icon: Icon(
+                  // logout button
                   Icons.power_settings_new,
                   color: Colors.black,
                   size: 30,
@@ -157,92 +157,100 @@ class _WeatherPageState extends State<WeatherPage>
             Stack(
               children: [
                 Positioned(
-                  left: MediaQuery.of(context).size.width * 0.04, // Set the position from the left edge
-                  top: MediaQuery.of(context).size.height * 0.51,// Set the position from the top edge
+                  left: MediaQuery.of(context).size.width *
+                      0.04, // Set the position from the left edge
+                  top: MediaQuery.of(context).size.height *
+                      0.51, // Set the position from the top edge
                   child: MediaQuery.of(context).size.width < 600
                       ? Container(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.orange.withOpacity(0.1)),
-                  )
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.orange.withOpacity(0.1)),
+                        )
                       : Container(
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.orange.withOpacity(0.1)),
-                  ),
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.orange.withOpacity(0.1)),
+                        ),
                 ),
               ],
             ),
             Stack(
               children: [
                 Positioned(
-                  left: MediaQuery.of(context).size.width * 0.52, // Set the position from the left edge
-                  top: MediaQuery.of(context).size.height * 0.51, // Set the position from the top edge
+                  left: MediaQuery.of(context).size.width *
+                      0.52, // Set the position from the left edge
+                  top: MediaQuery.of(context).size.height *
+                      0.51, // Set the position from the top edge
                   child: MediaQuery.of(context).size.width < 600
                       ? Container(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.orange.withOpacity(0.1)),
-                  )
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.orange.withOpacity(0.1)),
+                        )
                       : Container(
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.orange.withOpacity(0.1)),
-                  ),
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.orange.withOpacity(0.1)),
+                        ),
                 ),
               ],
             ),
             Stack(
               children: [
                 Positioned(
-                  left: MediaQuery.of(context).size.width * 0.04, // Set the position from the left edge
-                  top: MediaQuery.of(context).size.height * 0.73, // Set the position from the top edge
+                  left: MediaQuery.of(context).size.width *
+                      0.04, // Set the position from the left edge
+                  top: MediaQuery.of(context).size.height *
+                      0.73, // Set the position from the top edge
                   child: MediaQuery.of(context).size.width < 600
                       ? Container(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.orange.withOpacity(0.1)),
-                  )
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.orange.withOpacity(0.1)),
+                        )
                       : Container(
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.orange.withOpacity(0.1)),
-                  ),
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.orange.withOpacity(0.1)),
+                        ),
                 ),
               ],
             ),
             Stack(
               children: [
                 Positioned(
-                  left: MediaQuery.of(context).size.width * 0.52, // Set the position from the left edge
-                  top: MediaQuery.of(context).size.height * 0.73, // Set the position from the top edge
+                  left: MediaQuery.of(context).size.width *
+                      0.52, // Set the position from the left edge
+                  top: MediaQuery.of(context).size.height *
+                      0.73, // Set the position from the top edge
                   child: MediaQuery.of(context).size.width < 600
                       ? Container(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.orange.withOpacity(0.1)),
-                  )
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.orange.withOpacity(0.1)),
+                        )
                       : Container(
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.orange.withOpacity(0.1)),
-                  ),
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: Colors.orange.withOpacity(0.1)),
+                        ),
                 ),
               ],
             ),

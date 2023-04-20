@@ -4,6 +4,9 @@ import 'package:flutter/rendering.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:weather/home/weather.dart';
 import 'package:weather/register/signup.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+bool _obscureText = true;
 
 class LoginPage extends StatefulWidget {
   @override
@@ -22,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
       _formKey.currentState!.save();
       try {
         UserCredential userCredential =
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: _username!,
           password: _password!,
         );
@@ -41,6 +44,7 @@ class _LoginPageState extends State<LoginPage> {
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
+                // Dialog box
                 title: Text('Login Failed'),
                 content: Text('No user found with the provided email.'),
                 actions: <Widget>[
@@ -83,7 +87,6 @@ class _LoginPageState extends State<LoginPage> {
     _passwordController.dispose();
     super.dispose();
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -99,8 +102,8 @@ class _LoginPageState extends State<LoginPage> {
         ),
         Container(
           padding: EdgeInsets.only(
-            left: MediaQuery.of(context).size.width*0.05,
-            top: MediaQuery.of(context).size.width*0.45,
+            left: MediaQuery.of(context).size.width * 0.05,
+            top: MediaQuery.of(context).size.width * 0.45,
           ),
           child: const Text(
             "Welcome\nBack",
@@ -113,12 +116,16 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ),
         Scaffold(
-          backgroundColor: Colors.transparent, // Set the background color to transparent
+          backgroundColor:
+              Colors.transparent, // Set the background color to transparent
           body: Form(
             key: _formKey,
             child: SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.45,right: 35,left: 35),
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.45,
+                    right: 35,
+                    left: 35),
                 child: Column(
                   children: [
                     TextFormField(
@@ -132,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       validator: (value) =>
-                      value!.isEmpty ? 'Please enter your username' : null,
+                          value!.isEmpty ? 'Please enter your username' : null,
                       onSaved: (value) {
                         _username = value;
                       },
@@ -140,7 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: 30),
                     TextFormField(
                       controller: _passwordController,
-                      obscureText: true,
+                      obscureText: _obscureText,
                       decoration: InputDecoration(
                         labelText: 'Password',
                         labelStyle: TextStyle(fontWeight: FontWeight.bold),
@@ -148,9 +155,22 @@ class _LoginPageState extends State<LoginPage> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
+                        suffixIcon: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _obscureText = !_obscureText;
+                            });
+                          },
+                          child: Icon(
+                            _obscureText
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: Colors.grey,
+                          ),
+                        ),
                       ),
                       validator: (value) =>
-                      value!.isEmpty ? 'Please enter your password' : null,
+                          value!.isEmpty ? 'Please enter your password' : null,
                       onSaved: (value) {
                         _password = value;
                       },
@@ -159,6 +179,49 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        Expanded(
+                          // Google Icon
+                          child: GestureDetector(
+                            onTap: () async {
+                              final GoogleSignInAccount? googleUser =
+                                  await GoogleSignIn().signIn();
+                              if (googleUser != null) {
+                                // Retrieve the user's Google account information
+                                final googleAuth =
+                                    await googleUser.authentication;
+                                final credential =
+                                    GoogleAuthProvider.credential(
+                                  accessToken: googleAuth.accessToken,
+                                  idToken: googleAuth.idToken,
+                                );
+
+                                // Authenticate the user with Firebase Auth
+                                await FirebaseAuth.instance
+                                    .signInWithCredential(credential);
+                                print('User authenticated successfully.');
+
+                                // Navigate to the home screen or some other authenticated content
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) {
+                                    print('Building WeatherPage widget.');
+                                    return WeatherPage();
+                                  }),
+                                );
+                              } else {
+                                print('Google sign-in failed.');
+                              }
+                            },
+                            child: CircleAvatar(
+                              radius: 35,
+                              backgroundColor: Colors.white,
+                              child: Padding(
+                                padding: const EdgeInsets.all(0),
+                                child: Image.asset('Assets/image/google.png'),
+                              ),
+                            ),
+                          ),
+                        ),
                         Container(
                           child: CircleAvatar(
                             radius: 30,
@@ -171,7 +234,8 @@ class _LoginPageState extends State<LoginPage> {
                                   _formKey.currentState!.save();
                                   try {
                                     UserCredential userCredential =
-                                        await FirebaseAuth.instance.signInWithEmailAndPassword(
+                                        await FirebaseAuth.instance
+                                            .signInWithEmailAndPassword(
                                       email: _username!,
                                       password: _password!,
                                     );
@@ -191,7 +255,8 @@ class _LoginPageState extends State<LoginPage> {
                                         builder: (BuildContext context) {
                                           return AlertDialog(
                                             title: Text('Login Failed'),
-                                            content: Text('No user found with the provided email.'),
+                                            content: Text(
+                                                'No user found with the provided email.'),
                                             actions: <Widget>[
                                               TextButton(
                                                 child: Text('OK'),
@@ -209,7 +274,8 @@ class _LoginPageState extends State<LoginPage> {
                                         builder: (BuildContext context) {
                                           return AlertDialog(
                                             title: Text('Login Failed'),
-                                            content: Text('The password is incorrect.'),
+                                            content: Text(
+                                                'The password is incorrect.'),
                                             actions: <Widget>[
                                               TextButton(
                                                 child: Text('OK'),
@@ -230,21 +296,43 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 100,),
+                    SizedBox(
+                      height: 100,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        TextButton(onPressed: (){Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => MyRegister()));}, child: Text('Sign Up',style: TextStyle(decoration: TextDecoration.underline , fontSize: 18,color: Color(0xff4c505b)),)),
-                        TextButton(onPressed: (){}, child: Text('Forgot Password',style: TextStyle(decoration: TextDecoration.underline , fontSize: 18,color: Color(0xff4c505b)),)),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MyRegister()));
+                            },
+                            child: Text(
+                              'Sign Up',
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  fontSize: 18,
+                                  color: Color(0xff4c505b)),
+                            )),
+                        TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              'Forgot Password',
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  fontSize: 18,
+                                  color: Color(0xff4c505b)),
+                            )),
                       ],
                     ),
                   ],
                 ),
               ),
             ),
-          ),)
+          ),
+        )
       ],
     );
   }
