@@ -12,8 +12,8 @@ class SignUpController extends GetxController {
   final phoneno = TextEditingController();
   final password = TextEditingController();
 
+
   void registerUser (String email , String password) {
     AuthenticationRepository.instance.createUserWithEmailAndPassword(email , password);
   }
-
 }

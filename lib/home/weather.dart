@@ -157,28 +157,35 @@ class _WeatherPageState extends State<WeatherPage> {
             Stack(
               children: [
                 Positioned(
-                  left: MediaQuery.of(context).size.width *
-                      0.04, // Set the position from the left edge
-                  top: MediaQuery.of(context).size.height *
-                      0.51, // Set the position from the top edge
-                  child: MediaQuery.of(context).size.width < 600
-                      ? Container(
-                          width: MediaQuery.of(context).size.width * 0.45,
-                          height: MediaQuery.of(context).size.height * 0.2,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.orange.withOpacity(0.1)),
-                        )
-                      : Container(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                          height: MediaQuery.of(context).size.height * 0.3,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.orange.withOpacity(0.1)),
+                  left: MediaQuery.of(context).size.width * 0.04,
+                  top: MediaQuery.of(context).size.height * 0.51,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.45,
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.orange.withOpacity(0.1),
+                      ),
+                      child: Center(
+                        child: Image(
+                          image: AssetImage('assets/image/calendar.png'),
+                          width: 80,
+                          height: 80,
                         ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
+
             Stack(
               children: [
                 Positioned(

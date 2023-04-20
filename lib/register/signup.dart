@@ -7,6 +7,7 @@ import 'package:weather/register/login.dart';
 import 'package:weather/register/signupcontroller.dart';
 
 
+
 class MyRegister extends StatefulWidget {
   const MyRegister({Key? key}) : super(key: key);
 
@@ -163,9 +164,9 @@ class _MyRegisterState extends State<MyRegister> {
                              child: ElevatedButton(
                                onPressed: () {
                                  if(_formKey.currentState!.validate() ){
-                                   SignUpController.instance.registerUser(controller.email.text.trim(), controller.password.text.trim());
+                                    SignUpController.instance.registerUser(controller.email.text.trim(), controller.password.text.trim());
                                  }
-                               },
+                                 },
                                child: Text('SignUp'),
                              ),
                            ),

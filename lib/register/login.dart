@@ -216,7 +216,7 @@ class _LoginPageState extends State<LoginPage> {
                               radius: 35,
                               backgroundColor: Colors.white,
                               child: Padding(
-                                padding: const EdgeInsets.all(0),
+                                padding: EdgeInsets.only(right: 210),
                                 child: Image.asset('Assets/image/google.png'),
                               ),
                             ),
@@ -242,12 +242,19 @@ class _LoginPageState extends State<LoginPage> {
                                     // User is logged in, navigate to WeatherPage
                                     Navigator.push(
                                       context,
-                                      PageTransition(
-                                        type: PageTransitionType.rightToLeft,
-                                        child: WeatherPage(),
-                                        duration: Duration(milliseconds: 500),
+                                      PageRouteBuilder(
+                                        transitionDuration: Duration(milliseconds: 1000),
+                                        pageBuilder: (context, animation, secondaryAnimation) => WeatherPage(),
+                                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                          // Create a fade transition animation
+                                          return FadeTransition(
+                                            opacity: animation,
+                                            child: child,
+                                          );
+                                        },
                                       ),
                                     );
+
                                   } on FirebaseAuthException catch (e) {
                                     if (e.code == 'user-not-found') {
                                       showDialog(
