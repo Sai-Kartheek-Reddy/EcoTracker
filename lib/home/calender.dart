@@ -24,12 +24,15 @@ class _MonthPageState extends State<MonthPage> {
   List<DateTime> _getDaysInMonth(DateTime month) {
     var firstDayOfMonth = DateTime(month.year, month.month, 1);
     var lastDayOfMonth = DateTime(month.year, month.month + 1, 0);
-    return List.generate(
-        lastDayOfMonth.day - firstDayOfMonth.day + 1,
-            (i) => DateTime(month.year, month.month, i + 1));
+    return List.generate(lastDayOfMonth.day - firstDayOfMonth.day + 1,
+        (i) => DateTime(month.year, month.month, i + 1));
   }
 
   Widget _buildDateBox(DateTime date) {
+    final now = DateTime.now();
+    final isToday = date.isAtSameMomentAs(now);
+    final isBeforeToday = date.isBefore(now);
+
     final editing = ValueNotifier<bool>(_values[date] != null);
 
     return Padding(
@@ -54,9 +57,11 @@ class _MonthPageState extends State<MonthPage> {
                     Align(
                       alignment: Alignment.center,
                       child: TextFormField(
-                        enabled: !isEditing,
+                        enabled: (isToday || isBeforeToday) &&
+                            !isEditing, // Enable if it's today or before today and not already editing
                         initialValue: _values[date]?.toStringAsFixed(4),
-                        keyboardType: TextInputType.numberWithOptions(decimal: true),
+                        keyboardType:
+                            TextInputType.numberWithOptions(decimal: true),
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(
                             RegExp(r'^\d*\.?\d{0,2}'),
@@ -69,14 +74,14 @@ class _MonthPageState extends State<MonthPage> {
                             _values[date] = 0;
                           } else {
                             final newValue = num.tryParse(value);
-                            if (newValue != null && newValue.toStringAsFixed(2) == value) {
+                            if (newValue != null &&
+                                newValue.toStringAsFixed(2) == value) {
                               setState(() {
                                 _values[date] = newValue.toInt();
                               });
                             }
                           }
                         },
-
                         onEditingComplete: () {
                           editing.value = false;
                         },
@@ -91,12 +96,6 @@ class _MonthPageState extends State<MonthPage> {
       ),
     );
   }
-
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -116,22 +115,26 @@ class _MonthPageState extends State<MonthPage> {
                   Spacer(),
                   Text(
                     DateFormat('MMMM').format(DateTime.now()),
-                    style: TextStyle(fontSize: 24, ),
+                    style: TextStyle(
+                      fontSize: 24,
+                    ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height*0.01,),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.01,
+            ),
             Expanded(
               child: GridView.count(
                 crossAxisCount: 4,
                 children: _daysInMonth
                     .map((date) => Column(
-                  children: [
-                    // Text(DateFormat('dd').format(date)),
-                    _buildDateBox(date),
-                  ],
-                ))
+                          children: [
+                            // Text(DateFormat('dd').format(date)),
+                            _buildDateBox(date),
+                          ],
+                        ))
                     .toList(),
               ),
             ),
