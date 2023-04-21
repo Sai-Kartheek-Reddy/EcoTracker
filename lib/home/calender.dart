@@ -55,21 +55,29 @@ class _MonthPageState extends State<MonthPage> {
                       alignment: Alignment.center,
                       child: TextFormField(
                         enabled: !isEditing,
-                        initialValue: _values[date]?.toString(),
+                        initialValue: _values[date]?.toStringAsFixed(4),
                         keyboardType: TextInputType.numberWithOptions(decimal: true),
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(
-                            RegExp(r'^\d*\.?\d{0,4}'),
+                            RegExp(r'^\d*\.?\d{0,2}'),
                             replacementString: '',
                           ),
                         ],
                         textAlign: TextAlign.center,
                         onChanged: (value) {
-                          setState(() {
-                            _values[date] = (value == null ? null : num.parse(value).toInt())!;
-                          });
+                          if (value == null || value.isEmpty) {
+                            _values[date] = 0;
+                          } else {
+                            final newValue = num.tryParse(value);
+                            if (newValue != null && newValue.toStringAsFixed(2) == value) {
+                              setState(() {
+                                _values[date] = newValue.toInt();
+                              });
+                            }
+                          }
                         },
-                        onFieldSubmitted: (_) {
+
+                        onEditingComplete: () {
                           editing.value = false;
                         },
                       ),
@@ -89,6 +97,7 @@ class _MonthPageState extends State<MonthPage> {
 
 
 
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -97,14 +106,14 @@ class _MonthPageState extends State<MonthPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(12.0),
               child: Row(
                 children: [
                   Text(
                     'Hello, ${widget.userName}!',
                     style: TextStyle(fontSize: 24),
                   ),
-                  SizedBox(width: MediaQuery.of(context).size.width*0.55,),
+                  Spacer(),
                   Text(
                     DateFormat('MMMM').format(DateTime.now()),
                     style: TextStyle(fontSize: 24, ),

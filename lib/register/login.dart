@@ -216,7 +216,7 @@ class _LoginPageState extends State<LoginPage> {
                               radius: 35,
                               backgroundColor: Colors.white,
                               child: Padding(
-                                padding: EdgeInsets.only(right: 210),
+                                padding: EdgeInsets.only(right: 180),
                                 child: Image.asset('Assets/image/google.png'),
                               ),
                             ),
