@@ -43,7 +43,6 @@ dependencies:
   page_transition: ^2.0.9
   get: ^4.6.5
   google_sign_in: ^6.1.0
-  flutter_charts: ^0.5.1
 
 dev_dependencies:
   flutter_test:
