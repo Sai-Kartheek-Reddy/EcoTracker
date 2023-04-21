@@ -1,6 +1,35 @@
 import 'package:flutter/material.dart';
 
 
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Carbon Footprint Calculator',
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Text(
+            'Carbon Footprint Calculator',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        body: FuelConsumptionPage(),
+      ),
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+      ),
+    );
+  }
+
+
+}
 
 class FuelConsumptionPage extends StatefulWidget {
   const FuelConsumptionPage({Key? key}) : super(key: key);
@@ -100,6 +129,8 @@ class _FuelConsumptionPageState extends State<FuelConsumptionPage> {
 
   Widget buildFuelTypeDropDown() {
     return Container(
+      width: 100.0,
+      height: 65.0,
       decoration: ShapeDecoration(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
@@ -169,6 +200,8 @@ class _FuelConsumptionPageState extends State<FuelConsumptionPage> {
 
   Widget buildCarModelDropDown() {
     return Container(
+      width: 100.0,
+      height: 65.0,
       decoration: ShapeDecoration(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
@@ -239,32 +272,33 @@ class _FuelConsumptionPageState extends State<FuelConsumptionPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.03,
-                left: MediaQuery.of(context).size.height * 0.01,
-                right: MediaQuery.of(context).size.height * 0.02,
-              ),
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Colors.transparent, Colors.white10])),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
+        body: Container(
+          padding: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height * 0.03,
+            left: MediaQuery.of(context).size.height * 0.01,
+            right: MediaQuery.of(context).size.height * 0.02,
+          ),
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Colors.transparent, Colors.white10])),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
 
-                  const SizedBox(height: 16),
-                  buildCarModelDropDown(),
-                  const SizedBox(height: 16),
+              const SizedBox(height: 12),
+              buildCarModelDropDown(),
+              const SizedBox(height: 12),
 
-                  const SizedBox(height: 16),
-                  buildFuelTypeDropDown(),
-                  const SizedBox(height: 16),
+              const SizedBox(height: 12),
+              buildFuelTypeDropDown(),
+              const SizedBox(height: 12),
 
-                SizedBox(height: MediaQuery.of(context).size.height*0.03),
-                  Column(
+              SizedBox(height: MediaQuery.of(context).size.height*0.02),
+              Container(
+                child:SingleChildScrollView(
+                  child:Column(
                     children: [
                       TextFormField(
                         controller: distanceController,
@@ -296,13 +330,17 @@ class _FuelConsumptionPageState extends State<FuelConsumptionPage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height*0.04,),
-                  ElevatedButton(
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height*0.02,),
+              Container(
+                child: SingleChildScrollView(
+                  child:ElevatedButton(
                     onPressed: calculateFuelConsumption,
                     child: Icon(
                       Icons.send_outlined,
                       color: Colors.black,
-                      size: 30,
+                      size: 22,
                     ),
                     style: ElevatedButton.styleFrom(
                       shape: CircleBorder(),
@@ -312,10 +350,11 @@ class _FuelConsumptionPageState extends State<FuelConsumptionPage> {
                       elevation: 4,
                     ),
                   ),
-                  const SizedBox(height: 50),
-                ],
+                ),
               ),
-            ),
+              const SizedBox(height: 50),
+            ],
+          ),
         ),
       ),
     );
