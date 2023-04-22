@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
             builder: (BuildContext context) {
               return AlertDialog(
                 // Dialog box
-                title: Text('Login Failed'),
+                title: Text('Login is Failed'),
                 content: Text('No user found with the provided email.'),
                 actions: <Widget>[
                   TextButton(

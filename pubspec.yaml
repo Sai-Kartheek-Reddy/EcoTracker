@@ -43,6 +43,7 @@ dependencies:
   page_transition: ^2.0.9
   get: ^4.6.5
   google_sign_in: ^6.1.0
+  cloud_firestore: ^4.5.2
 
 dev_dependencies:
   flutter_test:
