@@ -240,82 +240,82 @@ class _FuelConsumptionPageState extends State<FuelConsumptionPage> {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.only(
-                top: MediaQuery.of(context).size.height * 0.03,
-                left: MediaQuery.of(context).size.height * 0.01,
-                right: MediaQuery.of(context).size.height * 0.02,
-              ),
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Colors.transparent, Colors.white10])),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
+          child: Container(
+            padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height * 0.03,
+              left: MediaQuery.of(context).size.height * 0.01,
+              right: MediaQuery.of(context).size.height * 0.02,
+            ),
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [Colors.transparent, Colors.white10])),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
 
-                  const SizedBox(height: 16),
-                  buildCarModelDropDown(),
-                  const SizedBox(height: 16),
+                const SizedBox(height: 16),
+                buildCarModelDropDown(),
+                const SizedBox(height: 16),
 
-                  const SizedBox(height: 16),
-                  buildFuelTypeDropDown(),
-                  const SizedBox(height: 16),
+                const SizedBox(height: 16),
+                buildFuelTypeDropDown(),
+                const SizedBox(height: 16),
 
                 SizedBox(height: MediaQuery.of(context).size.height*0.03),
-                  Column(
-                    children: [
-                      TextFormField(
-                        controller: distanceController,
-                        keyboardType: TextInputType.numberWithOptions(decimal: true),
-                        decoration: InputDecoration(
-                          labelText: ' Distance (km)',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: BorderSide(
-                              width: 10.0,
-                              color: Colors.grey.shade400,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: MediaQuery.of(context).size.height*0.03,), // Set the height of the gap to 10.0
-                      Container(
-                        decoration: BoxDecoration(
+                Column(
+                  children: [
+                    TextFormField(
+                      controller: distanceController,
+                      keyboardType: TextInputType.numberWithOptions(decimal: true),
+                      decoration: InputDecoration(
+                        labelText: ' Distance (km)',
+                        border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
-                          border: Border.all(color: Colors.grey.shade400),
-                        ),
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            labelText: '    CO2 emission factor (g/km)',
+                          borderSide: BorderSide(
+                            width: 10.0,
+                            color: Colors.grey.shade400,
                           ),
-                          controller: fuelConsumptionController,
-                          readOnly: true,
                         ),
                       ),
-                    ],
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height*0.04,),
-                  ElevatedButton(
-                    onPressed: calculateFuelConsumption,
-                    child: Icon(
-                      Icons.send_outlined,
-                      color: Colors.black,
-                      size: 30,
                     ),
-                    style: ElevatedButton.styleFrom(
-                      shape: CircleBorder(),
-                      primary: Colors.indigo,
-                      onPrimary: Colors.black,
-                      padding: EdgeInsets.all(15),
-                      elevation: 4,
+                    SizedBox(height: MediaQuery.of(context).size.height*0.03,), // Set the height of the gap to 10.0
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        border: Border.all(color: Colors.grey.shade400),
+                      ),
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                          labelText: '    CO2 emission factor (g/km)',
+                        ),
+                        controller: fuelConsumptionController,
+                        readOnly: true,
+                      ),
                     ),
+                  ],
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height*0.04,),
+                ElevatedButton(
+                  onPressed: calculateFuelConsumption,
+                  child: Icon(
+                    Icons.send_outlined,
+                    color: Colors.black,
+                    size: 30,
                   ),
-                  const SizedBox(height: 50),
-                ],
-              ),
+                  style: ElevatedButton.styleFrom(
+                    shape: CircleBorder(),
+                    primary: Colors.indigo,
+                    onPrimary: Colors.black,
+                    padding: EdgeInsets.all(15),
+                    elevation: 4,
+                  ),
+                ),
+                const SizedBox(height: 50),
+              ],
             ),
+          ),
         ),
       ),
     );

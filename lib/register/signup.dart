@@ -192,7 +192,7 @@ class _MyRegisterState extends State<MyRegister> {
                               MaterialPageRoute(
                                   builder: (context) => LoginPage()));
                         },
-                        child: Text('Login'),
+                        child: Text('Login in'),
                       ),
                     )
                   ],
