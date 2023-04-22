@@ -101,44 +101,52 @@ class _MonthPageState extends State<MonthPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Row(
-                children: [
-                  Text(
-                    'Hello, ${widget.userName}!',
-                    style: TextStyle(fontSize: 24),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("Assets/image/back1.jpg"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        'Hello, ${widget.userName}!',
+                        style: TextStyle(fontSize: 24),
+                      ),
+                      Spacer(),
+                      Text(
+                        DateFormat('MMMM').format(DateTime.now()),
+                        style: TextStyle(
+                          fontSize: 24,
+                        ),
+                      ),
+                    ],
                   ),
-                  Spacer(),
-                  Text(
-                    DateFormat('MMMM').format(DateTime.now()),
-                    style: TextStyle(
-                      fontSize: 24,
-                    ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.01,
+                ),
+                Expanded(
+                  child: GridView.count(
+                    crossAxisCount: 4,
+                    children: _daysInMonth
+                        .map((date) => Column(
+                              children: [
+                                // Text(DateFormat('dd').format(date)),
+                                _buildDateBox(date),
+                              ],
+                            ))
+                        .toList(),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.01,
-            ),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 4,
-                children: _daysInMonth
-                    .map((date) => Column(
-                          children: [
-                            // Text(DateFormat('dd').format(date)),
-                            _buildDateBox(date),
-                          ],
-                        ))
-                    .toList(),
-              ),
-            ),
-          ],
         ),
       ),
     );
