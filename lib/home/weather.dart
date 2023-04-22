@@ -30,7 +30,7 @@ class _WeatherPageState extends State<WeatherPage> {
         await http.get(Uri.https('api.weatherbit.io', '/v2.0/forecast/daily', {
       'lat': '15.4589',
       'lon': '75.0078',
-      'key': 'ff81b333db694538b210e492254e7e61',
+      'key': '9cdbfe08e097475095343c07d7f5cfc5',
     }));
     print(response.statusCode);
     if (response.statusCode == 200) {
