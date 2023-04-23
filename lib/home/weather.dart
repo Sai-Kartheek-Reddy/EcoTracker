@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:geolocator/geolocator.dart';
 import '../register/login.dart';
 import 'calender.dart';
 import 'date.dart';
@@ -12,6 +13,8 @@ class WeatherPage extends StatefulWidget {
   @override
   _WeatherPageState createState() => _WeatherPageState();
 }
+
+
 
 class _WeatherPageState extends State<WeatherPage> {
   var _highTemp;
@@ -26,6 +29,8 @@ class _WeatherPageState extends State<WeatherPage> {
   }
 
   void _getWeatherData() async {
+
+
     var response =
         await http.get(Uri.https('api.weatherbit.io', '/v2.0/forecast/daily', {
       'lat': '15.4589',
@@ -91,7 +96,7 @@ class _WeatherPageState extends State<WeatherPage> {
                 },
                 icon: Icon(
                   // logout button
-                  Icons.power_settings_new,
+                  Icons.logout_outlined,
                   color: Colors.black,
                   size: 30,
                 ),
