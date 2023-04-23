@@ -68,7 +68,7 @@ class _DatePageState extends State<DatePage> {
             height: MediaQuery.of(context).size.height * 0.2,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: Colors.orange.withOpacity(0.3),
+              color: Colors.lightBlueAccent.withOpacity(0.0),
             ),
             child: Column(
               children: [
