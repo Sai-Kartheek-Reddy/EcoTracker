@@ -13,12 +13,20 @@ class MonthPage extends StatefulWidget {
 
 class _MonthPageState extends State<MonthPage> {
   late List<DateTime> _daysInMonth;
-  Map<DateTime, int> _values = {};
+  late Map<DateTime, double> _hardcodedValues; // add this map
 
   @override
   void initState() {
     super.initState();
+
     _daysInMonth = _getDaysInMonth(DateTime.now());
+
+    // initialize the hardcoded values map with some example values
+    _hardcodedValues = {
+      _daysInMonth[0]: 10.0,
+      _daysInMonth[5]: 20.0,
+      _daysInMonth[10]: 30.0,
+    };
   }
 
   List<DateTime> _getDaysInMonth(DateTime month) {
@@ -33,7 +41,7 @@ class _MonthPageState extends State<MonthPage> {
     final isToday = date.isAtSameMomentAs(now);
     final isBeforeToday = date.isBefore(now);
 
-    final editing = ValueNotifier<bool>(_values[date] != null);
+    final editing = ValueNotifier<bool>(_hardcodedValues[date] != null);
 
     return Padding(
       padding: const EdgeInsets.all(4.0),
@@ -59,7 +67,8 @@ class _MonthPageState extends State<MonthPage> {
                       child: TextFormField(
                         enabled: (isToday || isBeforeToday) &&
                             !isEditing, // Enable if it's today or before today and not already editing
-                        initialValue: _values[date]?.toStringAsFixed(4),
+                        initialValue: _hardcodedValues[date]?.toStringAsFixed(
+                            2), // use the hardcoded value if available
                         keyboardType:
                             TextInputType.numberWithOptions(decimal: true),
                         inputFormatters: [
@@ -71,13 +80,14 @@ class _MonthPageState extends State<MonthPage> {
                         textAlign: TextAlign.center,
                         onChanged: (value) {
                           if (value == null || value.isEmpty) {
-                            _values[date] = 0;
+                            _hardcodedValues[date] = 0;
                           } else {
                             final newValue = num.tryParse(value);
                             if (newValue != null &&
                                 newValue.toStringAsFixed(2) == value) {
                               setState(() {
-                                _values[date] = newValue.toInt();
+                                _hardcodedValues[date] =
+                                    newValue.toInt() as double;
                               });
                             }
                           }
@@ -109,44 +119,44 @@ class _MonthPageState extends State<MonthPage> {
             ),
           ),
           child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Hello, ${widget.userName}!',
-                        style: TextStyle(fontSize: 24),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Row(
+                  children: [
+                    Text(
+                      'Hello, ${widget.userName}!',
+                      style: TextStyle(fontSize: 24),
+                    ),
+                    Spacer(),
+                    Text(
+                      DateFormat('MMMM').format(DateTime.now()),
+                      style: TextStyle(
+                        fontSize: 24,
                       ),
-                      Spacer(),
-                      Text(
-                        DateFormat('MMMM').format(DateTime.now()),
-                        style: TextStyle(
-                          fontSize: 24,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.01,
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.01,
+              ),
+              Expanded(
+                child: GridView.count(
+                  crossAxisCount: 4,
+                  children: _daysInMonth
+                      .map((date) => Column(
+                            children: [
+                              // Text(DateFormat('dd').format(date)),
+                              _buildDateBox(date),
+                            ],
+                          ))
+                      .toList(),
                 ),
-                Expanded(
-                  child: GridView.count(
-                    crossAxisCount: 4,
-                    children: _daysInMonth
-                        .map((date) => Column(
-                              children: [
-                                // Text(DateFormat('dd').format(date)),
-                                _buildDateBox(date),
-                              ],
-                            ))
-                        .toList(),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
+          ),
         ),
       ),
     );
