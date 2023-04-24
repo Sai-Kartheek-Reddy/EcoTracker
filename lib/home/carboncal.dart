@@ -283,7 +283,7 @@ class _FuelConsumptionPageState extends State<FuelConsumptionPage> {
             value: 'Three-Wheeler',
             child: Row(
               children: [
-                Icon(Icons.directions_car_rounded),
+                Icon(Icons.directions_train_rounded),
                 const SizedBox(width: 8),
                 Text('Three-Wheeler'),
               ],
