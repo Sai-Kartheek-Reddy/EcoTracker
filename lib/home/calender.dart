@@ -21,27 +21,27 @@ class _MonthPageState extends State<MonthPage> {
     _daysInMonth = _getDaysInMonth(DateTime.now());
 
     // Set fixed values for specific dates
-    _values[DateTime(2023, 4, 1)] = 0.39;
-    _values[DateTime(2023, 4, 2)] = 0.66;
-    _values[DateTime(2023, 4, 3)] = 1.05;
+    _values[DateTime(2023, 4, 1)] = 10.62;
+    _values[DateTime(2023, 4, 2)] = 19.79;
+    _values[DateTime(2023, 4, 3)] = 0.39;
     _values[DateTime(2023, 4, 4)] = 2.23;
-    _values[DateTime(2023, 4, 5)] = 5.67;
-    _values[DateTime(2023, 4, 6)] = 7.83;
-    _values[DateTime(2023, 4, 7)] = 11.01;
-    _values[DateTime(2023, 4, 8)] = 12.14;
-    _values[DateTime(2023, 4, 9)] = 0;
-    _values[DateTime(2023, 4, 10)] = 10.97;
-    _values[DateTime(2023, 4, 11)] = 14.41;
-    _values[DateTime(2023, 4, 12)] = 15.4;
-    _values[DateTime(2023, 4, 13)] = 10.62;
-    _values[DateTime(2023, 4, 14)] = 12.96;
-    _values[DateTime(2023, 4, 15)] = 17.81;
+    _values[DateTime(2023, 4, 5)] = 12.96;
+    _values[DateTime(2023, 4, 6)] = 17.81;
+    _values[DateTime(2023, 4, 7)] = 1.05;
+    _values[DateTime(2023, 4, 8)] = 10.97;
+    _values[DateTime(2023, 4, 9)] = 0.1;
+    _values[DateTime(2023, 4, 10)] = 15.4;
+    _values[DateTime(2023, 4, 11)] = 11.01;
+    _values[DateTime(2023, 4, 12)] = 5.67;
+    _values[DateTime(2023, 4, 13)] = 7.83;
+    _values[DateTime(2023, 4, 14)] = 18.57;
+    _values[DateTime(2023, 4, 15)] = 15.54;
     _values[DateTime(2023, 4, 16)] = 19.79;
-    _values[DateTime(2023, 4, 17)] = 10.76;
-    _values[DateTime(2023, 4, 18)] = 15.45;
-    _values[DateTime(2023, 4, 19)] = 18.57;
-    _values[DateTime(2023, 4, 20)] = 8.66;
-    _values[DateTime(2023, 4, 21)] = 3.78;
+    _values[DateTime(2023, 4, 17)] = 15.66;
+    _values[DateTime(2023, 4, 18)] = 6.73;
+    _values[DateTime(2023, 4, 19)] = 7.66;
+    _values[DateTime(2023, 4, 20)] = 12.19;
+    _values[DateTime(2023, 4, 21)] = 17.83;
   }
 
   List<DateTime> _getDaysInMonth(DateTime month) {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 
-
 class GraphApp extends StatefulWidget {
   @override
   _GraphAppState createState() => _GraphAppState();
@@ -18,39 +17,31 @@ class _GraphAppState extends State<GraphApp> {
   void initState() {
     super.initState();
     _todayDay = DateTime.now().day;
-    _daysInMonth = DateTime(DateTime.now().year, DateTime.now().month + 1, 0).day;
+    _daysInMonth =
+        DateTime(DateTime.now().year, DateTime.now().month + 1, 0).day;
     _selectedDate = DateTime.now();
     data = [
-      SalesData(1, 55),
-      SalesData(2, 30),
-      SalesData(3, 25),
-      SalesData(4, 40),
-      SalesData(5, 35),
-      SalesData(6, 50),
-      SalesData(7, 45),
-      SalesData(8, 30),
-      SalesData(9, 55),
-      SalesData(10, 50),
-      SalesData(11, 40),
-      SalesData(12, 35),
-      SalesData(13, 30),
-      SalesData(14, 25),
-      SalesData(15, 20),
-      SalesData(16, 15),
-      SalesData(17, 25),
-      SalesData(18, 30),
-      SalesData(19, 40),
-      SalesData(20, 45),
-      SalesData(21, 50),
-      SalesData(22, 35),
-      SalesData(23, 10),
-      SalesData(24, 65),
-      SalesData(25, 50),
-      SalesData(26, 45),
-      SalesData(27, 35),
-      SalesData(28, 40),
-      SalesData(29, 55),
-      SalesData(30, 50),
+      SalesData(1, 10.62),
+      SalesData(2, 19.79),
+      SalesData(3, 0.39),
+      SalesData(4, 2.23),
+      SalesData(5, 12.96),
+      SalesData(6, 17.81),
+      SalesData(7, 1.05),
+      SalesData(8, 10.97),
+      SalesData(9, 0.1),
+      SalesData(10, 15.4),
+      SalesData(11, 11.01),
+      SalesData(12, 5.67),
+      SalesData(13, 7.83),
+      SalesData(14, 18.57),
+      SalesData(15, 15.54),
+      SalesData(16, 19.79),
+      SalesData(17, 15.66),
+      SalesData(18, 6.73),
+      SalesData(19, 7.66),
+      SalesData(20, 12.19),
+      SalesData(21, 17.83),
       //SalesData(DateTime.now().day, 0.0) // today's data
     ];
   }
@@ -71,7 +62,11 @@ class _GraphAppState extends State<GraphApp> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text('Select Date :',style: TextStyle(fontWeight: FontWeight.w400 , fontSize: 24),),
+                        Text(
+                          'Select Date :',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400, fontSize: 24),
+                        ),
                         SizedBox(width: 6),
                         ElevatedButton(
                           onPressed: () {
@@ -88,7 +83,8 @@ class _GraphAppState extends State<GraphApp> {
                     height: 600,
                     child: SfCartesianChart(
                       primaryXAxis: DateTimeAxis(
-                        minimum: DateTime(DateTime.now().year, DateTime.now().month, 1),
+                        minimum: DateTime(
+                            DateTime.now().year, DateTime.now().month, 1),
                         maximum: _selectedDate,
                         interval: 7,
                         dateFormat: DateFormat.d(),
@@ -105,9 +101,13 @@ class _GraphAppState extends State<GraphApp> {
                       title: ChartTitle(text: 'Monthly Emission values'),
                       series: <LineSeries<SalesData, DateTime>>[
                         LineSeries<SalesData, DateTime>(
-                          name: 'Carbon Emission \n${DateFormat.MMMM().format(DateTime.now())}',
+                          name:
+                              'Carbon Emission \n${DateFormat.MMMM().format(DateTime.now())}',
                           dataSource: data,
-                          xValueMapper: (SalesData sales, _) => DateTime(DateTime.now().year, DateTime.now().month, sales.day),
+                          xValueMapper: (SalesData sales, _) => DateTime(
+                              DateTime.now().year,
+                              DateTime.now().month,
+                              sales.day),
                           yValueMapper: (SalesData sales, _) => sales.sales,
                           dataLabelSettings: DataLabelSettings(isVisible: true),
                           markerSettings: MarkerSettings(isVisible: true),
@@ -129,13 +129,14 @@ class _GraphAppState extends State<GraphApp> {
     final DateTime now = DateTime.now();
     final DateTime firstDayOfMonth = DateTime(now.year, now.month, 1);
     final DateTime lastDayOfMonth =
-    DateTime(now.year, now.month + 1, 0).add(Duration(days: 1));
+        DateTime(now.year, now.month + 1, 0).add(Duration(days: 1));
 
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: _selectedDate,
       firstDate: firstDayOfMonth,
-      lastDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+      lastDate: DateTime(
+          DateTime.now().year, DateTime.now().month, DateTime.now().day),
       selectableDayPredicate: (DateTime date) {
         return date.isAfter(firstDayOfMonth.subtract(Duration(days: 1))) &&
             date.isBefore(lastDayOfMonth);
