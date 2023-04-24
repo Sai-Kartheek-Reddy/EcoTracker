@@ -21,27 +21,27 @@ class _MonthPageState extends State<MonthPage> {
     _daysInMonth = _getDaysInMonth(DateTime.now());
 
     // Set fixed values for specific dates
-    _values[DateTime(2023, 4, 1)] = 3.65;
-    _values[DateTime(2023, 4, 2)] = 53;
-    _values[DateTime(2023, 4, 3)] = 2;
-    _values[DateTime(2023, 4, 4)] = 55;
-    _values[DateTime(2023, 4, 5)] = 22;
-    _values[DateTime(2023, 4, 6)] = 2;
-    _values[DateTime(2023, 4, 7)] = 55;
-    _values[DateTime(2023, 4, 8)] = 22;
-    _values[DateTime(2023, 4, 9)] = 2;
-    _values[DateTime(2023, 4, 10)] = 55;
-    _values[DateTime(2023, 4, 11)] = 22;
-    _values[DateTime(2023, 4, 12)] = 2;
-    _values[DateTime(2023, 4, 13)] = 55;
-    _values[DateTime(2023, 4, 14)] = 22;
-    _values[DateTime(2023, 4, 15)] = 2;
-    _values[DateTime(2023, 4, 16)] = 55;
-    _values[DateTime(2023, 4, 17)] = 22;
-    _values[DateTime(2023, 4, 18)] = 2;
-    _values[DateTime(2023, 4, 19)] = 55;
-    _values[DateTime(2023, 4, 20)] = 22;
-    _values[DateTime(2023, 4, 21)] = 2;
+    _values[DateTime(2023, 4, 1)] = 0.39;
+    _values[DateTime(2023, 4, 2)] = 0.66;
+    _values[DateTime(2023, 4, 3)] = 1.05;
+    _values[DateTime(2023, 4, 4)] = 2.23;
+    _values[DateTime(2023, 4, 5)] = 5.67;
+    _values[DateTime(2023, 4, 6)] = 7.83;
+    _values[DateTime(2023, 4, 7)] = 11.01;
+    _values[DateTime(2023, 4, 8)] = 12.14;
+    _values[DateTime(2023, 4, 9)] = 0;
+    _values[DateTime(2023, 4, 10)] = 10.97;
+    _values[DateTime(2023, 4, 11)] = 14.41;
+    _values[DateTime(2023, 4, 12)] = 15.4;
+    _values[DateTime(2023, 4, 13)] = 10.62;
+    _values[DateTime(2023, 4, 14)] = 12.96;
+    _values[DateTime(2023, 4, 15)] = 17.81;
+    _values[DateTime(2023, 4, 16)] = 19.79;
+    _values[DateTime(2023, 4, 17)] = 10.76;
+    _values[DateTime(2023, 4, 18)] = 15.45;
+    _values[DateTime(2023, 4, 19)] = 18.57;
+    _values[DateTime(2023, 4, 20)] = 8.66;
+    _values[DateTime(2023, 4, 21)] = 3.78;
   }
 
   List<DateTime> _getDaysInMonth(DateTime month) {
@@ -132,44 +132,44 @@ class _MonthPageState extends State<MonthPage> {
             ),
           ),
           child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        'Hello, ${widget.userName}!',
-                        style: TextStyle(fontSize: 24),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Row(
+                  children: [
+                    Text(
+                      'Hello, ${widget.userName}!',
+                      style: TextStyle(fontSize: 24),
+                    ),
+                    Spacer(),
+                    Text(
+                      DateFormat('MMMM').format(DateTime.now()),
+                      style: TextStyle(
+                        fontSize: 24,
                       ),
-                      Spacer(),
-                      Text(
-                        DateFormat('MMMM').format(DateTime.now()),
-                        style: TextStyle(
-                          fontSize: 24,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.01,
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.01,
+              ),
+              Expanded(
+                child: GridView.count(
+                  crossAxisCount: 4,
+                  children: _daysInMonth
+                      .map((date) => Column(
+                            children: [
+                              // Text(DateFormat('dd').format(date)),
+                              _buildDateBox(date),
+                            ],
+                          ))
+                      .toList(),
                 ),
-                Expanded(
-                  child: GridView.count(
-                    crossAxisCount: 4,
-                    children: _daysInMonth
-                        .map((date) => Column(
-                              children: [
-                                // Text(DateFormat('dd').format(date)),
-                                _buildDateBox(date),
-                              ],
-                            ))
-                        .toList(),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
+          ),
         ),
       ),
     );

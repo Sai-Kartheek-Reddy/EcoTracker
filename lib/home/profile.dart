@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather/home/weather.dart';
 
 class ProfilePage extends StatelessWidget {
   final String username;
@@ -31,7 +32,10 @@ class ProfilePage extends StatelessWidget {
                 color: Colors.black,
               ),
               onPressed: () {
-
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => WeatherPage()),
+                );
               },
             ),
           ),
