@@ -42,6 +42,9 @@ class _GraphAppState extends State<GraphApp> {
       SalesData(19, 7.66),
       SalesData(20, 12.19),
       SalesData(21, 17.83),
+      SalesData(22, 2.69),
+      SalesData(23, 9.42),
+      SalesData(24, 16.66),
       //SalesData(DateTime.now().day, 0.0) // today's data
     ];
   }
