@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:weather/firebase_options.dart';
 import 'package:weather/home/weather.dart';
-import 'package:weather/profile.dart';
 import 'package:weather/register/authenication_repository.dart';
 import 'package:weather/register/login.dart';
 import 'package:weather/register/signup.dart';
@@ -21,6 +20,9 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
+
+
+
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,

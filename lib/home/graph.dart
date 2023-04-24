@@ -2,22 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 
+
 class GraphApp extends StatefulWidget {
-  final List<SalesData> data;
-  final int todayDay;
-  final int daysInMonth;
-
-  const GraphApp({
-    Key? key,
-    required this.data,
-    required this.todayDay,
-    required this.daysInMonth,
-  }) : super(key: key);
-
   @override
   _GraphAppState createState() => _GraphAppState();
 }
-
 
 class _GraphAppState extends State<GraphApp> {
   late List<SalesData> data;
@@ -32,7 +21,7 @@ class _GraphAppState extends State<GraphApp> {
     _daysInMonth = DateTime(DateTime.now().year, DateTime.now().month + 1, 0).day;
     _selectedDate = DateTime.now();
     data = [
-      SalesData(1, 20),
+      SalesData(1, 55),
       SalesData(2, 30),
       SalesData(3, 25),
       SalesData(4, 40),

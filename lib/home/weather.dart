@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:geolocator/geolocator.dart';
+import 'package:weather/home/graph.dart';
+import 'package:weather/home/profile.dart';
 import '../register/login.dart';
 import 'calender.dart';
 import 'date.dart';
@@ -172,7 +174,7 @@ class _WeatherPageState extends State<WeatherPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => MonthPage(userName: "Sai")),
+                            builder: (context) => CarbonCalculator()),
                       );
                     },
                     child: Container(
@@ -197,16 +199,19 @@ class _WeatherPageState extends State<WeatherPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => MonthPage(userName: "sai")),
+                            builder: (context) => CarbonCalculator()),
                       );
                     },
                     child: Column(
                       children: [
-                        Image.asset(
-                          'Assets/image/calendar.png',
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          height: MediaQuery.of(context).size.height * 0.15,
-                          // add any other properties you need here
+                        Transform.rotate(
+                          angle: 30 * pi / 180, // set the angle in radians
+                          child: Image.asset(
+                            'Assets/image/carbon.png',
+                            width: MediaQuery.of(context).size.width * 0.4,
+                            height: MediaQuery.of(context).size.height * 0.15,
+                            // add any other properties you need here
+                          ),
                         ),
                         SizedBox(height: 5),
                       ],
@@ -224,7 +229,7 @@ class _WeatherPageState extends State<WeatherPage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => CarbonCalculator()),
+                        MaterialPageRoute(builder: (context) => MonthPage(userName: 'Srinivas')),
                       );
                     },
                     child: Container(
@@ -249,20 +254,17 @@ class _WeatherPageState extends State<WeatherPage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => CarbonCalculator()),
+                        MaterialPageRoute(builder: (context) => MonthPage(userName: 'Srinivas')),
                       );
                     },
                     child: Column(
                       children: [
-                        Transform.rotate(
-                          angle: 30 * pi / 180, // set the angle in radians
-                          child: Image.asset(
-                            'Assets/image/carbon.png',
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            height: MediaQuery.of(context).size.height * 0.15,
-                            // add any other properties you need here
-                          ),
-                        )
+                        Image.asset(
+                          'Assets/image/calendar.png',
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          height: MediaQuery.of(context).size.height * 0.15,
+                          // add any other properties you need here
+                        ),
 
                       ],
                     ),
@@ -281,7 +283,7 @@ class _WeatherPageState extends State<WeatherPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => MonthPage(userName: "Sai")),
+                            builder: (context) => GraphApp()),
                       );
                     },
                     child: Container(
@@ -306,7 +308,7 @@ class _WeatherPageState extends State<WeatherPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => MonthPage(userName: "sai")),
+                            builder: (context) => GraphApp()),
                       );
                     },
                     child: Column(
@@ -327,25 +329,61 @@ class _WeatherPageState extends State<WeatherPage> {
             Stack(
               children: [
                 Positioned(
-                  left: MediaQuery.of(context).size.width *
-                      0.52, // Set the position from the left edge
-                  top: MediaQuery.of(context).size.height *
-                      0.73, // Set the position from the top edge
-                  child: MediaQuery.of(context).size.width < 600
-                      ? Container(
-                          width: MediaQuery.of(context).size.width * 0.45,
-                          height: MediaQuery.of(context).size.height * 0.2,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                            color: Colors.lightBlueAccent.withOpacity(0.2),),
-                        )
-                      : Container(
-                          width: MediaQuery.of(context).size.width * 0.2,
-                          height: MediaQuery.of(context).size.height * 0.3,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: Colors.orange.withOpacity(0.1)),
+                  left: MediaQuery.of(context).size.width * 0.52,
+                  top: MediaQuery.of(context).size.height * 0.73,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfilePage(username: "Srinivas", email: "srinivassaichava@gmail.com", phoneNumber: "7416413438", onLogout: () {Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (context) => LoginPage()),
+                                  (route) => false,
+                            );})),
+                      );
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.45,
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Colors.lightBlueAccent.withOpacity(0.2),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Stack(
+              children: [
+                Positioned(
+                  left: MediaQuery.of(context).size.width * 0.57,
+                  top: MediaQuery.of(context).size.height * 0.61,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProfilePage(username: "Srinivas", email: "srinivassaichava@gmail.com", phoneNumber: "7416413438", onLogout: () {Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (context) => LoginPage()),
+                                  (route) => false,
+                            );})),
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'Assets/image/profile.png',
+                          width: MediaQuery.of(context).size.width * 0.38,
+                          height: MediaQuery.of(context).size.height * 0.42,
+                          // add any other properties you need here
                         ),
+                        SizedBox(height: 5),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),

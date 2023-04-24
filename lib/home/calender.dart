@@ -13,12 +13,35 @@ class MonthPage extends StatefulWidget {
 
 class _MonthPageState extends State<MonthPage> {
   late List<DateTime> _daysInMonth;
-  Map<DateTime, int> _values = {};
+  Map<DateTime, double> _values = {};
 
   @override
   void initState() {
     super.initState();
     _daysInMonth = _getDaysInMonth(DateTime.now());
+
+    // Set fixed values for specific dates
+    _values[DateTime(2023, 4, 1)] = 3.65;
+    _values[DateTime(2023, 4, 2)] = 53;
+    _values[DateTime(2023, 4, 3)] = 2;
+    _values[DateTime(2023, 4, 4)] = 55;
+    _values[DateTime(2023, 4, 5)] = 22;
+    _values[DateTime(2023, 4, 6)] = 2;
+    _values[DateTime(2023, 4, 7)] = 55;
+    _values[DateTime(2023, 4, 8)] = 22;
+    _values[DateTime(2023, 4, 9)] = 2;
+    _values[DateTime(2023, 4, 10)] = 55;
+    _values[DateTime(2023, 4, 11)] = 22;
+    _values[DateTime(2023, 4, 12)] = 2;
+    _values[DateTime(2023, 4, 13)] = 55;
+    _values[DateTime(2023, 4, 14)] = 22;
+    _values[DateTime(2023, 4, 15)] = 2;
+    _values[DateTime(2023, 4, 16)] = 55;
+    _values[DateTime(2023, 4, 17)] = 22;
+    _values[DateTime(2023, 4, 18)] = 2;
+    _values[DateTime(2023, 4, 19)] = 55;
+    _values[DateTime(2023, 4, 20)] = 22;
+    _values[DateTime(2023, 4, 21)] = 2;
   }
 
   List<DateTime> _getDaysInMonth(DateTime month) {
@@ -59,7 +82,7 @@ class _MonthPageState extends State<MonthPage> {
                       child: TextFormField(
                         enabled: (isToday || isBeforeToday) &&
                             !isEditing, // Enable if it's today or before today and not already editing
-                        initialValue: _values[date]?.toStringAsFixed(4),
+                        initialValue: _values[date]?.toStringAsFixed(2),
                         keyboardType:
                             TextInputType.numberWithOptions(decimal: true),
                         inputFormatters: [
@@ -77,7 +100,7 @@ class _MonthPageState extends State<MonthPage> {
                             if (newValue != null &&
                                 newValue.toStringAsFixed(2) == value) {
                               setState(() {
-                                _values[date] = newValue.toInt();
+                                _values[date] = newValue.toDouble();
                               });
                             }
                           }
