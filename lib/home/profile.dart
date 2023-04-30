@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather/home/weather.dart';
+import 'package:weather/register/login.dart';
 
 class ProfilePage extends StatelessWidget {
   final String username;
@@ -74,8 +75,8 @@ class ProfilePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               CircleAvatar(
-                backgroundImage: AssetImage('assets/logo.jpg'),
-                radius: 80,
+                backgroundImage: AssetImage('Assets/image/profile.jpg'),
+                radius: 100,
               ),
               SizedBox(height: 16),
               Text(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
+import 'package:weather/home/weather.dart';
 
 class GraphApp extends StatefulWidget {
   @override
@@ -50,8 +52,63 @@ class _GraphAppState extends State<GraphApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: Scaffold(
+      home: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(70),
+            // set your desired height here
+            child: AppBar(
+              backgroundColor: Colors.white,
+              elevation: 0,
+              centerTitle: true,
+              leading: Padding(
+                padding: EdgeInsets.only(top: 7.0),
+                child: IconButton(
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.leftToRight,
+                        child: WeatherPage(),
+                        duration: Duration(milliseconds: 500),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              title: Padding(
+                padding: EdgeInsets.only(top: 12.0),
+                child: Text(
+                  'Emission Graph',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22.0,
+                  ),
+                ),
+              ),
+              flexibleSpace: ClipRRect(
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(50),
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0xFF00AEEF),
+                        Color(0XFF4AC3E3),
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
           body: Center(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -89,12 +146,11 @@ class _GraphAppState extends State<GraphApp> {
                         interval: 7,
                         dateFormat: DateFormat.d(),
                         axisLine: AxisLine(width: 3),
-                        title: AxisTitle(text: 'Days'),
                       ),
                       primaryYAxis: NumericAxis(
                         minimum: 0,
-                        maximum: 70,
-                        interval: 10,
+                        maximum: 24,
+                        interval: 2,
                         axisLine: AxisLine(width: 3),
                         //title: AxisTitle(text: 'Emission in KG'),
                       ),
@@ -109,7 +165,10 @@ class _GraphAppState extends State<GraphApp> {
                               DateTime.now().month,
                               sales.day),
                           yValueMapper: (SalesData sales, _) => sales.sales,
-                          dataLabelSettings: DataLabelSettings(isVisible: true),
+                          dataLabelSettings: const DataLabelSettings(
+                            isVisible: true,
+                            labelAlignment: ChartDataLabelAlignment.bottom,
+                          ),
                           markerSettings: MarkerSettings(isVisible: true),
                         ),
                       ],
@@ -121,7 +180,6 @@ class _GraphAppState extends State<GraphApp> {
             ),
           ),
         ),
-      ),
     );
   }
 

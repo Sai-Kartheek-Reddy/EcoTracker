@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:geolocator/geolocator.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:weather/home/graph.dart';
 import 'package:weather/home/profile.dart';
 import '../register/login.dart';
@@ -173,8 +174,11 @@ class _WeatherPageState extends State<WeatherPage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => CarbonCalculator()),
+                        PageTransition(
+                          type: PageTransitionType.rightToLeft,
+                          child: CarbonCalculator(),
+                          duration: Duration(milliseconds: 500),
+                        ),
                       );
                     },
                     child: Container(
@@ -198,8 +202,11 @@ class _WeatherPageState extends State<WeatherPage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => CarbonCalculator()),
+                        PageTransition(
+                          type: PageTransitionType.rightToLeft,
+                          child: CarbonCalculator(),
+                          duration: Duration(milliseconds: 500),
+                        ),
                       );
                     },
                     child: Column(
@@ -230,6 +237,14 @@ class _WeatherPageState extends State<WeatherPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => MonthPage(userName: 'Srinivas')),
+                      );
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.rightToLeft,
+                          child: MonthPage(userName: 'Srinivas',),
+                          duration: Duration(milliseconds: 500),
+                        ),
                       );
                     },
                     child: Container(
@@ -282,8 +297,11 @@ class _WeatherPageState extends State<WeatherPage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => GraphApp()),
+                        PageTransition(
+                          type: PageTransitionType.rightToLeft,
+                          child: GraphApp(),
+                          duration: Duration(milliseconds: 500),
+                        ),
                       );
                     },
                     child: Container(
@@ -307,8 +325,11 @@ class _WeatherPageState extends State<WeatherPage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => GraphApp()),
+                        PageTransition(
+                          type: PageTransitionType.rightToLeft,
+                          child: GraphApp(),
+                          duration: Duration(milliseconds: 500),
+                        ),
                       );
                     },
                     child: Column(

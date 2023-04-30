@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:weather/home/weather.dart';
 
 class CarbonCalculator extends StatelessWidget {
@@ -10,7 +11,7 @@ class CarbonCalculator extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Carbon Footprint Calculator',
       home: Scaffold(
-        extendBodyBehindAppBar: true,
+        extendBodyBehindAppBar: false,
         // allows the body to go behind the app bar
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(70),
@@ -29,7 +30,11 @@ class CarbonCalculator extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => WeatherPage()),
+                    PageTransition(
+                      type: PageTransitionType.rightToLeft,
+                      child: WeatherPage(),
+                      duration: Duration(milliseconds: 500),
+                    ),
                   );
                 },
               ),
@@ -319,16 +324,11 @@ class _FuelConsumptionPageState extends State<FuelConsumptionPage> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.03,
-              left: MediaQuery.of(context).size.height * 0.01,
-              right: MediaQuery.of(context).size.height * 0.02,
-            ),
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [Colors.transparent, Colors.white10])),
+            // padding: EdgeInsets.only(
+            //   top: MediaQuery.of(context).size.height * 0.03,
+            //   left: MediaQuery.of(context).size.height * 0.01,
+            //   right: MediaQuery.of(context).size.height * 0.02,
+            // ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -424,17 +424,13 @@ class _FuelConsumptionPageState extends State<FuelConsumptionPage> {
                 ),
                 const SizedBox(height: 50),
                 Container(
-                  height: 240, // Set the height of the bottom section
+                  height: 280,
+                  width: 300,// Set the height of the bottom section
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white,
-                        spreadRadius: 2,
-                        blurRadius: 5,
-                        offset: Offset(0, 3),
-                      ),
-                    ],
+                    image: DecorationImage(
+                      image: AssetImage("Assets/image/suriya.jpg"),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ],
