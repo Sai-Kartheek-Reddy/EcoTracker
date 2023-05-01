@@ -10,7 +10,6 @@ import 'package:weather/providers/models_provider.dart';
 import 'package:weather/register/authenication_repository.dart';
 import 'package:weather/register/login.dart';
 import 'package:weather/register/signup.dart';
-
 import 'constants/constants.dart';
 
 void main() {
