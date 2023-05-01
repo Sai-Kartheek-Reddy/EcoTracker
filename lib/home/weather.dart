@@ -7,6 +7,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:weather/home/graph.dart';
 import 'package:weather/home/profile.dart';
+import 'package:weather/screens/chat_screen.dart';
 import '../register/login.dart';
 import 'calender.dart';
 import 'date.dart';
@@ -24,6 +25,37 @@ class _WeatherPageState extends State<WeatherPage> {
   var _lowTemp;
   var _temp;
   var _temp1;
+
+  double _x = 40;
+  double _y = 70;
+
+  // Add a function to update the position of the icon
+  void _updatePosition(DragUpdateDetails details) {
+    setState(() {
+      _x += details.delta.dx;
+      _y += details.delta.dy;
+
+      // Restrict the icon's movement within the phone borders
+      final Size size = MediaQuery.of(context).size;
+      final double maxX = size.width - 50;
+      final double maxY = size.height - 50;
+      final double minX = 0;
+      final double minY = 0;
+
+      if (_x > maxX) {
+        _x = maxX;
+      } else if (_x < minX) {
+        _x = minX;
+      }
+
+      if (_y > maxY) {
+        _y = maxY;
+      } else if (_y < minY) {
+        _y = minY;
+      }
+    });
+  }
+
 
   @override
   void initState() {
@@ -56,360 +88,381 @@ class _WeatherPageState extends State<WeatherPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Stack(
-          children: [
-            if (_temp != null && _temp > 28)
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('Assets/image/back4.jpg'),
-                    fit: BoxFit.cover,
+      home: SafeArea(
+        child : Scaffold(
+            body: Stack(
+              children: [
+                if (_temp != null && _temp > 28)
+                  Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('Assets/image/back4.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                if (_temp != null && _temp >= 26 && _temp < 28)
+                  Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('Assets/image/back4.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                if (_temp != null && _temp < 10)
+                  Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/image/rainy.jpeg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                Positioned(
+                  top: 50,
+                  right: 0,
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        (route) => false,
+                      );
+                    },
+                    icon: Icon(
+                      // logout button
+                      Icons.logout_outlined,
+                      color: Colors.black,
+                      size: 30,
+                    ),
                   ),
                 ),
-              ),
-            if (_temp != null && _temp >= 26 && _temp < 28)
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('Assets/image/sunny.jpeg'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            if (_temp != null && _temp < 10)
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/image/rainy.jpeg'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            Positioned(
-              top: 50,
-              right: 0,
-              child: IconButton(
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                    (route) => false,
-                  );
-                },
-                icon: Icon(
-                  // logout button
-                  Icons.logout_outlined,
-                  color: Colors.black,
-                  size: 30,
-                ),
-              ),
-            ),
-            Container(
-              child: Container(
-                margin: EdgeInsets.only(top: 80, bottom: 20),
-                padding: EdgeInsets.only(left: 20, right: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
+                Container(
+                  child: Container(
+                    margin: EdgeInsets.only(top: 80, bottom: 20),
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Text(
-                          "Dharwad",
-                          style: TextStyle(fontSize: 40, color: Colors.black),
-                        ),
-                        SizedBox(
-                          height: 6,
-                        ),
-                        Row(
+                        Column(
                           children: [
-                            SizedBox(
-                              width: 5,
-                            ),
+                            // SizedBox(
+                            //   height: 5,
+                            // ),
                             Text(
-                              '$_temp°C',
-                              style: TextStyle(
-                                  fontSize: 35, fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Icon(Icons.wb_cloudy_outlined),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              'H:$_highTemp°C',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              "Dharwad",
+                              style: TextStyle(fontSize: 40, color: Colors.black),
                             ),
                             SizedBox(
-                              width: 10,
+                              height: 6,
                             ),
-                            Text(
-                              'L:$_lowTemp°C',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  '$_temp°C',
+                                  style: TextStyle(
+                                      fontSize: 35, fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Icon(Icons.wb_cloudy_outlined),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'H:$_highTemp°C',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  'L:$_lowTemp°C',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                )
+                              ],
                             )
                           ],
-                        )
+                        ),
                       ],
+                    ),
+                  ),
+                ),
+                DatePage(),
+                Stack(
+                  children: [
+                    Positioned(
+                      left: MediaQuery.of(context).size.width * 0.04,
+                      top: MediaQuery.of(context).size.height * 0.44,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.rightToLeft,
+                              child: CarbonCalculator(),
+                              duration: Duration(milliseconds: 500),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.lightBlueAccent.withOpacity(0.2),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),
-              ),
-            ),
-            DatePage(),
-            Stack(
-              children: [
-                Positioned(
-                  left: MediaQuery.of(context).size.width * 0.04,
-                  top: MediaQuery.of(context).size.height * 0.51,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.rightToLeft,
-                          child: CarbonCalculator(),
-                          duration: Duration(milliseconds: 500),
+                Stack(
+                  children: [
+                    Positioned(
+                      left: MediaQuery.of(context).size.width * 0.06,
+                      top: MediaQuery.of(context).size.height * 0.46,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.rightToLeft,
+                              child: CarbonCalculator(),
+                              duration: Duration(milliseconds: 500),
+                            ),
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            Transform.rotate(
+                              angle: 30 * pi / 180, // set the angle in radians
+                              child: Image.asset(
+                                'Assets/image/carbon.png',
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                height: MediaQuery.of(context).size.height * 0.15,
+                                // add any other properties you need here
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                          ],
                         ),
-                      );
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      height: MediaQuery.of(context).size.height * 0.2,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.lightBlueAccent.withOpacity(0.2),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-            Stack(
-              children: [
-                Positioned(
-                  left: MediaQuery.of(context).size.width * 0.06,
-                  top: MediaQuery.of(context).size.height * 0.53,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.rightToLeft,
-                          child: CarbonCalculator(),
-                          duration: Duration(milliseconds: 500),
+                Stack(
+                  children: [
+                    Positioned(
+                      left: MediaQuery.of(context).size.width * 0.52,
+                      top: MediaQuery.of(context).size.height * 0.44,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MonthPage(userName: 'Srinivas')),
+                          );
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.rightToLeft,
+                              child: MonthPage(userName: 'Srinivas',),
+                              duration: Duration(milliseconds: 500),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.lightBlueAccent.withOpacity(0.2),
+                          ),
+
                         ),
-                      );
-                    },
-                    child: Column(
-                      children: [
-                        Transform.rotate(
-                          angle: 30 * pi / 180, // set the angle in radians
-                          child: Image.asset(
-                            'Assets/image/carbon.png',
-                            width: MediaQuery.of(context).size.width * 0.4,
-                            height: MediaQuery.of(context).size.height * 0.15,
-                            // add any other properties you need here
+                      ),
+                    ),
+                  ],
+                ),
+                Stack(
+                  children: [
+                    Positioned(
+                      left: MediaQuery.of(context).size.width * 0.56,
+                      top: MediaQuery.of(context).size.height * 0.46,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MonthPage(userName: 'Srinivas')),
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'Assets/image/calendar.png',
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.15,
+                              // add any other properties you need here
+                            ),
+
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                Stack(
+                  children: [
+                    Positioned(
+                      left: MediaQuery.of(context).size.width * 0.04,
+                      top: MediaQuery.of(context).size.height * 0.67,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.rightToLeft,
+                              child: GraphApp(),
+                              duration: Duration(milliseconds: 500),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.lightBlueAccent.withOpacity(0.2),
                           ),
                         ),
-                        SizedBox(height: 5),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Stack(
-              children: [
-                Positioned(
-                  left: MediaQuery.of(context).size.width * 0.52,
-                  top: MediaQuery.of(context).size.height * 0.51,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => MonthPage(userName: 'Srinivas')),
-                      );
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.rightToLeft,
-                          child: MonthPage(userName: 'Srinivas',),
-                          duration: Duration(milliseconds: 500),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      height: MediaQuery.of(context).size.height * 0.2,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.lightBlueAccent.withOpacity(0.2),
-                      ),
-
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Stack(
-              children: [
-                Positioned(
-                  left: MediaQuery.of(context).size.width * 0.56,
-                  top: MediaQuery.of(context).size.height * 0.53,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => MonthPage(userName: 'Srinivas')),
-                      );
-                    },
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'Assets/image/calendar.png',
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          height: MediaQuery.of(context).size.height * 0.15,
-                          // add any other properties you need here
-                        ),
-
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-            Stack(
-              children: [
-                Positioned(
-                  left: MediaQuery.of(context).size.width * 0.04,
-                  top: MediaQuery.of(context).size.height * 0.73,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.rightToLeft,
-                          child: GraphApp(),
-                          duration: Duration(milliseconds: 500),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      height: MediaQuery.of(context).size.height * 0.2,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.lightBlueAccent.withOpacity(0.2),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-            Stack(
-              children: [
-                Positioned(
-                  left: MediaQuery.of(context).size.width * 0.08,
-                  top: MediaQuery.of(context).size.height * 0.62,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.rightToLeft,
-                          child: GraphApp(),
-                          duration: Duration(milliseconds: 500),
+                Stack(
+                  children: [
+                    Positioned(
+                      left: MediaQuery.of(context).size.width * 0.08,
+                      top: MediaQuery.of(context).size.height * 0.56,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.rightToLeft,
+                              child: GraphApp(),
+                              duration: Duration(milliseconds: 500),
+                            ),
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'Assets/image/chart-line-up.png',
+                              width: MediaQuery.of(context).size.width * 0.4,
+                              height: MediaQuery.of(context).size.height * 0.42,
+                              // add any other properties you need here
+                            ),
+                            SizedBox(height: 5),
+                          ],
                         ),
-                      );
-                    },
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'Assets/image/chart-line-up.png',
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          height: MediaQuery.of(context).size.height * 0.42,
-                          // add any other properties you need here
-                        ),
-                        SizedBox(height: 5),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Stack(
-              children: [
-                Positioned(
-                  left: MediaQuery.of(context).size.width * 0.52,
-                  top: MediaQuery.of(context).size.height * 0.73,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ProfilePage(username: "Srinivas", email: "srinivassaichava@gmail.com", phoneNumber: "7416413438", onLogout: () {Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(builder: (context) => LoginPage()),
-                                  (route) => false,
-                            );})),
-                      );
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      height: MediaQuery.of(context).size.height * 0.2,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: Colors.lightBlueAccent.withOpacity(0.2),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-            Stack(
-              children: [
+                Stack(
+                  children: [
+                    Positioned(
+                      left: MediaQuery.of(context).size.width * 0.52,
+                      top: MediaQuery.of(context).size.height * 0.67,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfilePage(username: "Srinivas", email: "srinivassaichava@gmail.com", phoneNumber: "7416413438", onLogout: () {Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => LoginPage()),
+                                      (route) => false,
+                                );})),
+                          );
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.45,
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: Colors.lightBlueAccent.withOpacity(0.2),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Stack(
+                  children: [
+                    Positioned(
+                      left: MediaQuery.of(context).size.width * 0.57,
+                      top: MediaQuery.of(context).size.height * 0.56,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfilePage(username: "Srinivas", email: "srinivassaichava@gmail.com", phoneNumber: "7416413438", onLogout: () {Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => LoginPage()),
+                                      (route) => false,
+                                );})),
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              'Assets/image/profile.png',
+                              width: MediaQuery.of(context).size.width * 0.38,
+                              height: MediaQuery.of(context).size.height * 0.42,
+                              // add any other properties you need here
+                            ),
+                            SizedBox(height: 5),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 Positioned(
-                  left: MediaQuery.of(context).size.width * 0.57,
-                  top: MediaQuery.of(context).size.height * 0.61,
+                  left: _x,
+                  top: _y,
                   child: GestureDetector(
+                    onPanUpdate: _updatePosition,
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => ProfilePage(username: "Srinivas", email: "srinivassaichava@gmail.com", phoneNumber: "7416413438", onLogout: () {Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(builder: (context) => LoginPage()),
-                                  (route) => false,
-                            );})),
+                        MaterialPageRoute(builder: (context) => ChatScreen()),
                       );
                     },
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'Assets/image/profile.png',
-                          width: MediaQuery.of(context).size.width * 0.38,
-                          height: MediaQuery.of(context).size.height * 0.42,
-                          // add any other properties you need here
-                        ),
-                        SizedBox(height: 5),
-                      ],
+                    child: Icon(
+                      Icons.chat,
+                      size: 50,
+                      color: Colors.black,
                     ),
                   ),
                 ),
+
               ],
             ),
-          ],
-        ),
+          ),
       ),
     );
   }

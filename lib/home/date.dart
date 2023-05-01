@@ -62,7 +62,7 @@ class _DatePageState extends State<DatePage> {
       children: [
         Positioned(
           left: MediaQuery.of(context).size.width * 0.04,
-          top: MediaQuery.of(context).size.height * 0.3,
+          top: MediaQuery.of(context).size.height * 0.26,
           child: Container(
             width: MediaQuery.of(context).size.width * 0.93,
             height: MediaQuery.of(context).size.height * 0.2,
@@ -73,7 +73,7 @@ class _DatePageState extends State<DatePage> {
             child: Column(
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.03,
+                  height: MediaQuery.of(context).size.height * 0.0,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
