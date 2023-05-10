@@ -10,6 +10,7 @@ import 'package:weather/providers/models_provider.dart';
 import 'package:weather/register/authenication_repository.dart';
 import 'package:weather/register/login.dart';
 import 'package:weather/register/signup.dart';
+import 'package:weather/screens/chat_screen.dart';
 import 'constants/constants.dart';
 
 void main() {
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
             appBarTheme: AppBarTheme(
               color: cardColor,
             )),
-        home: LoginPage(),
+        home: ChatScreen(),
       ),
     );
   }
