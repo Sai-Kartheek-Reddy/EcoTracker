@@ -269,13 +269,13 @@ class _WeatherPageState extends State<WeatherPage> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => MonthPage(userName: 'Srinivas')),
+                            MaterialPageRoute(builder: (context) => MonthPage(userName: 'User')),
                           );
                           Navigator.push(
                             context,
                             PageTransition(
                               type: PageTransitionType.rightToLeft,
-                              child: MonthPage(userName: 'Srinivas',),
+                              child: MonthPage(userName: 'User',),
                               duration: Duration(milliseconds: 500),
                             ),
                           );
@@ -302,7 +302,7 @@ class _WeatherPageState extends State<WeatherPage> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => MonthPage(userName: 'Srinivas')),
+                            MaterialPageRoute(builder: (context) => MonthPage(userName: 'User')),
                           );
                         },
                         child: Column(
@@ -390,7 +390,7 @@ class _WeatherPageState extends State<WeatherPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ProfilePage(username: "Srinivas", email: "srinivassaichava@gmail.com", phoneNumber: "7416413438", onLogout: () {Navigator.pushAndRemoveUntil(
+                                builder: (context) => ProfilePage(username: "User", email: "Youremail@gmail.com", phoneNumber: "7416413438", onLogout: () {Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(builder: (context) => LoginPage()),
                                       (route) => false,
@@ -419,7 +419,7 @@ class _WeatherPageState extends State<WeatherPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ProfilePage(username: "Srinivas", email: "srinivassaichava@gmail.com", phoneNumber: "7416413438", onLogout: () {Navigator.pushAndRemoveUntil(
+                                builder: (context) => ProfilePage(username: "User", email: "Youremail@gmail.com", phoneNumber: "98765xxxxx", onLogout: () {Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(builder: (context) => LoginPage()),
                                       (route) => false,
