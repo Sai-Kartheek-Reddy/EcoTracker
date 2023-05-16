@@ -2,16 +2,16 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:weather/home/profile.dart';
 import 'package:http/http.dart' as http;
 import 'package:geolocator/geolocator.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:weather/home/graph.dart';
-import 'package:weather/home/profile.dart';
-import 'package:weather/screens/chat_screen.dart';
 import '../register/login.dart';
+import '../screens/chat_screen.dart';
 import 'calender.dart';
 import 'date.dart';
 import 'carboncal.dart';
+import 'graph.dart';
 
 class WeatherPage extends StatefulWidget {
   @override
@@ -441,24 +441,24 @@ class _WeatherPageState extends State<WeatherPage> {
                     ),
                   ],
                 ),
-                Positioned(
-                  left: _x,
-                  top: _y,
-                  child: GestureDetector(
-                    onPanUpdate: _updatePosition,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ChatScreen()),
-                      );
-                    },
-                    child: Icon(
-                      Icons.chat,
-                      size: 50,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
+                // Positioned(
+                //   left: _x,
+                //   top: _y,
+                //   child: GestureDetector(
+                //     onPanUpdate: _updatePosition,
+                //     onTap: () {
+                //       Navigator.push(
+                //         context,
+                //         MaterialPageRoute(builder: (context) => ChatScreen()),
+                //       );
+                //     },
+                //     child: Icon(
+                //       Icons.chat,
+                //       size: 50,
+                //       color: Colors.black,
+                //     ),
+                //   ),
+                // ),
 
               ],
             ),

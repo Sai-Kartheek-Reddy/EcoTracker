@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weather/home/weather.dart';
-import 'package:weather/register/login.dart';
+
+import '../register/login.dart';
 
 class ProfilePage extends StatelessWidget {
   final String username;

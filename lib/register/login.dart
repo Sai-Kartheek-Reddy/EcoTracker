@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:weather/home/weather.dart';
 import 'package:weather/register/signup.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 bool _obscureText = true;

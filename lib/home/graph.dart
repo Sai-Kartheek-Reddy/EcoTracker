@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:weather/home/weather.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
-import 'package:weather/home/weather.dart';
 
 class GraphApp extends StatefulWidget {
   @override
@@ -31,22 +31,22 @@ class _GraphAppState extends State<GraphApp> {
       SalesData(6, 17.81),
       SalesData(7, 1.05),
       SalesData(8, 10.97),
-      SalesData(9, 0.1),
-      SalesData(10, 15.4),
-      SalesData(11, 11.01),
-      SalesData(12, 5.67),
-      SalesData(13, 7.83),
-      SalesData(14, 18.57),
-      SalesData(15, 15.54),
-      SalesData(16, 19.79),
-      SalesData(17, 15.66),
-      SalesData(18, 6.73),
-      SalesData(19, 7.66),
-      SalesData(20, 12.19),
-      SalesData(21, 17.83),
-      SalesData(22, 2.69),
-      SalesData(23, 9.42),
-      SalesData(24, 16.66),
+      // SalesData(9, 0.1),
+      // SalesData(10, 15.4),
+      // SalesData(11, 11.01),
+      // SalesData(12, 5.67),
+      // SalesData(13, 7.83),
+      // SalesData(14, 18.57),
+      // SalesData(15, 15.54),
+      // SalesData(16, 19.79),
+      // SalesData(17, 15.66),
+      // SalesData(18, 6.73),
+      // SalesData(19, 7.66),
+      // SalesData(20, 12.19),
+      // SalesData(21, 17.83),
+      // SalesData(22, 2.69),
+      // SalesData(23, 9.42),
+      // SalesData(24, 16.66),
       //SalesData(DateTime.now().day, 0.0) // today's data
     ];
   }

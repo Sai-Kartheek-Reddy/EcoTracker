@@ -54,7 +54,7 @@ class _ChatScreenState extends State<ChatScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Image.asset(AssetsManager.openaiLogo),
         ),
-        title: const Text("Greenify",style: TextStyle(color: Colors.black),),
+        title: const Text("Greenify"),
         actions: [
           IconButton(
             onPressed: () async {
@@ -84,7 +84,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             if (_isTyping) ...[
               const SpinKitThreeBounce(
-                color: Colors.black,
+                color: Colors.white,
                 size: 18,
               ),
             ],
@@ -100,7 +100,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     Expanded(
                       child: TextField(
                         focusNode: focusNode,
-                        style: const TextStyle(color: Colors.black),
+                        style: const TextStyle(color: Colors.white),
                         controller: textEditingController,
                         onSubmitted: (value) async {
                           await sendMessageFCT(
@@ -109,7 +109,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         },
                         decoration: const InputDecoration.collapsed(
                             hintText: "How can I help you",
-                            hintStyle: TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
+                            hintStyle: TextStyle(color: Colors.grey)),
                       ),
                     ),
                     IconButton(
@@ -120,7 +120,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         },
                         icon: const Icon(
                           Icons.send,
-                          color: Colors.black,
+                          color: Colors.white,
                         ))
                   ],
                 ),

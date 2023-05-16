@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:weather/home/weather.dart';
-import 'package:weather/register/failure.dart';
-import 'package:weather/register/login.dart';
-import 'package:weather/register/signup.dart';
+
+import 'failure.dart';
+import 'login.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
