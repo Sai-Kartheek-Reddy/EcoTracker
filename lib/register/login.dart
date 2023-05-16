@@ -6,6 +6,18 @@ import 'package:weather/register/signup.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+Future<void> _loginWithGoogle() async {
+  GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+  AuthCredential credential = GoogleAuthProvider.credential(
+    accessToken: googleAuth?.accessToken,
+    idToken: googleAuth?.idToken,
+  );
+  UserCredential userCredential =
+      await FirebaseAuth.instance.signInWithCredential(credential);
+  print(userCredential.user?.displayName);
+}
+
 bool _obscureText = true;
 
 class LoginPage extends StatefulWidget {
@@ -182,6 +194,16 @@ class _LoginPageState extends State<LoginPage> {
                         Expanded(
                           // Google Icon
                           child: GestureDetector(
+                            onTap: _loginWithGoogle,
+                            child: CircleAvatar(
+                              radius: 35,
+                              backgroundColor: Colors.white,
+                              child: Padding(
+                                padding: const EdgeInsets.all(0),
+                                child: Image.asset('assets/google.png'),
+                              ),
+                            ),
+                          ), /*GestureDetector(
                             onTap: () async {
                               final GoogleSignInAccount? googleUser =
                                   await GoogleSignIn().signIn();
@@ -220,7 +242,7 @@ class _LoginPageState extends State<LoginPage> {
                                 child: Image.asset('Assets/image/google.png'),
                               ),
                             ),
-                          ),
+                          ),*/
                         ),
                         Container(
                           child: CircleAvatar(
