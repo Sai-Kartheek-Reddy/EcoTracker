@@ -200,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
                               backgroundColor: Colors.white,
                               child: Padding(
                                 padding: const EdgeInsets.all(0),
-                                child: Image.asset('assets/image/google.png'),
+                                child: Image.asset('Assets/image/google.png'),
                               ),
                             ),
                           ), /*GestureDetector(
