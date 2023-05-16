@@ -243,9 +243,13 @@ class _LoginPageState extends State<LoginPage> {
                                     Navigator.push(
                                       context,
                                       PageRouteBuilder(
-                                        transitionDuration: Duration(milliseconds: 1000),
-                                        pageBuilder: (context, animation, secondaryAnimation) => WeatherPage(),
-                                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                        transitionDuration:
+                                            Duration(milliseconds: 1000),
+                                        pageBuilder: (context, animation,
+                                                secondaryAnimation) =>
+                                            WeatherPage(),
+                                        transitionsBuilder: (context, animation,
+                                            secondaryAnimation, child) {
                                           // Create a fade transition animation
                                           return FadeTransition(
                                             opacity: animation,
@@ -254,7 +258,6 @@ class _LoginPageState extends State<LoginPage> {
                                         },
                                       ),
                                     );
-
                                   } on FirebaseAuthException catch (e) {
                                     if (e.code == 'user-not-found') {
                                       showDialog(
@@ -318,15 +321,6 @@ class _LoginPageState extends State<LoginPage> {
                             },
                             child: Text(
                               'Sign Up',
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  fontSize: 18,
-                                  color: Color(0xff4c505b)),
-                            )),
-                        TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              'Forgot Password',
                               style: TextStyle(
                                   decoration: TextDecoration.underline,
                                   fontSize: 18,
