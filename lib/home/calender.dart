@@ -20,7 +20,7 @@ class _MonthPageState extends State<MonthPage> {
     super.initState();
     _daysInMonth = _getDaysInMonth(DateTime.now());
 
-    // Set fixed values for specific dates
+    /*// Set fixed values for specific dates
     _values[DateTime(2023, 4, 1)] = 10.62;
     _values[DateTime(2023, 4, 2)] = 19.79;
     _values[DateTime(2023, 4, 3)] = 0.39;
@@ -41,7 +41,7 @@ class _MonthPageState extends State<MonthPage> {
     // _values[DateTime(2023, 4, 18)] = 6.73;
     // _values[DateTime(2023, 4, 19)] = 7.66;
     // _values[DateTime(2023, 4, 20)] = 12.19;
-    // _values[DateTime(2023, 4, 21)] = 17.83;
+    // _values[DateTime(2023, 4, 21)] = 17.83;*/
   }
 
   List<DateTime> _getDaysInMonth(DateTime month) {
@@ -188,7 +188,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MonthPage(userName: 'John Doe'),
+      home: MonthPage(userName: 'User'),
     );
   }
 }

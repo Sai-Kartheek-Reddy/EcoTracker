@@ -23,7 +23,7 @@ class _GraphAppState extends State<GraphApp> {
         DateTime(DateTime.now().year, DateTime.now().month + 1, 0).day;
     _selectedDate = DateTime.now();
     data = [
-      SalesData(1, 10.62),
+      /*SalesData(1, 10.62),
       SalesData(2, 19.79),
       SalesData(3, 0.39),
       SalesData(4, 2.23),
@@ -46,7 +46,7 @@ class _GraphAppState extends State<GraphApp> {
       // SalesData(21, 17.83),
       // SalesData(22, 2.69),
       // SalesData(23, 9.42),
-      // SalesData(24, 16.66),
+      // SalesData(24, 16.66),*/
       //SalesData(DateTime.now().day, 0.0) // today's data
     ];
   }
